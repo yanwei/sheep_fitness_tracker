@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>羊羊运动打卡系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航栏 -->
+        <header class="header">
+            <h1>羊羊运动打卡</h1>
+            <div class="month-nav">
+                <button id="prev-month">上个月</button>
+                <h2 id="current-month"></h2>
+                <button id="next-month">下个月</button>
+            </div>
+        </header>
+
+        <!-- 统计区域 -->
+        <section class="stats">
+            <div class="stat-item exercised">
+                <span class="stat-label">已运动</span>
+                <span class="stat-value" id="exercised-count">0</span>
+            </div>
+            <div class="stat-item absent">
+                <span class="stat-label">未运动</span>
+                <span class="stat-value" id="absent-count">0</span>
+            </div>
+            <div class="stat-item leave">
+                <span class="stat-label">已请假</span>
+                <span class="stat-value" id="leave-count">0</span>
+            </div>
+        </section>
+
+        <!-- 日历区域 -->
+        <section class="calendar">
+            <div class="weekdays">
+                <div class="weekday">日</div>
+                <div class="weekday">一</div>
+                <div class="weekday">二</div>
+                <div class="weekday">三</div>
+                <div class="weekday">四</div>
+                <div class="weekday">五</div>
+                <div class="weekday">六</div>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+        </section>
+
+        <!-- 状态选择菜单 -->
+        <div class="status-menu" id="status-menu">
+            <button class="status-option" data-status="exercised">已运动</button>
+            <button class="status-option" data-status="absent">未运动</button>
+            <button class="status-option" data-status="leave">已请假</button>
+        </div>
+
+        <!-- 底部信息 -->
+        <footer class="footer">
+            <p>© 2026 羊羊运动打卡系统</p>
+        </footer>
+    </div>
+
+    <!-- 自定义模态对话框 -->
+    <div class="modal" id="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>提示</h3>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-close">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
