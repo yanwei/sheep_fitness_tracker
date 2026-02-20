@@ -125,10 +125,7 @@ function generateCalendar(daysData) {
 function showStatusMenu(event, day) {
     selectedDay = day;
     
-    // 定位菜单
-    const rect = event.target.getBoundingClientRect();
-    statusMenu.style.left = `${rect.left}px`;
-    statusMenu.style.top = `${rect.bottom + 10}px`;
+    // 显示菜单（位置由CSS固定在底部）
     statusMenu.style.display = 'block';
     
     // 点击其他地方关闭菜单
@@ -233,6 +230,15 @@ function bindModalEvents() {
     const modalClose = document.getElementById('modal-close');
     if (modalClose) {
         modalClose.addEventListener('click', closeModal);
+    }
+    
+    // 绑定状态菜单关闭按钮
+    const closeMenuBtn = document.getElementById('close-menu');
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', () => {
+            statusMenu.style.display = 'none';
+            document.removeEventListener('click', closeStatusMenu);
+        });
     }
 }
 
