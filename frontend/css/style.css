@@ -437,12 +437,25 @@ body {
     }
 
     .stats {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 10px;
+        padding: 15px;
     }
 
     .stat-item {
-        min-width: auto;
+        flex: 1;
+        min-width: 90px;
+        padding: 15px 10px;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
     }
 
     .calendar-day {
@@ -471,6 +484,28 @@ body {
         order: -1;
         width: 100%;
         margin-bottom: 10px;
+    }
+
+    .stats {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .stat-item {
+        flex: 1;
+        min-width: 80px;
+        padding: 12px 8px;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    .stat-value {
+        font-size: 1.3rem;
     }
 
     .calendar-day {
