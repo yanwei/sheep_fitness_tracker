@@ -140,12 +140,109 @@ python app.py
   - 日历格子大小适合触摸操作
   - 统计信息调整为横向排列
 
-## 注意事项
+## 部署方案
+
+### 开发环境部署（快速启动）
 
 1. 确保后端服务在运行状态，否则前端无法获取和更新数据
 2. 首次运行时，系统会自动创建数据库和表结构
 3. 建议定期备份 `fitness.db` 文件，防止数据丢失
 4. 本项目使用的是开发服务器，生产环境部署时建议使用 WSGI 服务器
+
+### 生产环境部署（稳定方案）
+
+#### 1. 安装 Gunicorn WSGI 服务器
+
+```bash
+cd backend
+source venv/bin/activate
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple gunicorn
+```
+
+#### 2. 配置 Systemd 服务
+
+项目已包含以下 systemd 服务配置文件：
+
+**后端服务** (`/etc/systemd/system/sheep-fitness-backend.service`)：
+```ini
+[Unit]
+Description=Sheep Fitness Tracker Backend Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/.openclaw/workspace/sheep_fitness_tracker/backend
+ExecStart=/root/.openclaw/workspace/sheep_fitness_tracker/backend/venv/bin/gunicorn --workers=3 --bind=0.0.0.0:5000 app:app
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**前端服务** (`/etc/systemd/system/sheep-fitness-frontend.service`)：
+```ini
+[Unit]
+Description=Sheep Fitness Tracker Frontend Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/.openclaw/workspace/sheep_fitness_tracker/frontend
+ExecStart=/usr/bin/python3 -m http.server 8000
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### 3. 启动和管理服务
+
+```bash
+# 重新加载 Systemd 配置
+sudo systemctl daemon-reload
+
+# 启动服务
+sudo systemctl start sheep-fitness-backend
+sudo systemctl start sheep-fitness-frontend
+
+# 启用开机自启
+sudo systemctl enable sheep-fitness-backend
+sudo systemctl enable sheep-fitness-frontend
+
+# 查看服务状态
+sudo systemctl status sheep-fitness-backend
+sudo systemctl status sheep-fitness-frontend
+
+# 查看服务日志
+journalctl -xeu sheep-fitness-backend
+journalctl -xeu sheep-fitness-frontend
+
+# 停止服务
+sudo systemctl stop sheep-fitness-backend
+sudo systemctl stop sheep-fitness-frontend
+```
+
+#### 生产环境特性
+
+- **稳定性**：使用 Gunicorn 替代 Flask 开发服务器，性能和稳定性大幅提升
+- **自动恢复**：如果服务器崩溃，Systemd 会在 5 秒内自动重启
+- **多进程处理**：3 个工作进程同时处理请求，提高并发能力
+- **开机自启**：确保服务器在系统重启后自动运行
+- **Nginx 代理**：通过 Nginx 反向代理到 80 端口，提供更好的安全性和性能
+
+### 访问方式
+
+生产环境部署完成后，可通过以下方式访问：
+- 主站点：`http://服务器IP/`（80 端口）
+- 后端 API：`http://服务器IP/api/`（通过 Nginx 代理到 5000 端口）
 
 ## 后续扩展
 
