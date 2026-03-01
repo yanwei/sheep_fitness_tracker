@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -15,9 +16,9 @@
             </div>
             <h1>羊羊运动打卡</h1>
             <div class="month-nav">
-                <button id="prev-month">上月</button>
-                <h2 id="current-month"></h2>
-                <button id="next-month">下月</button>
+                <button id="prev-month">上个月</button>
+                <h2 id="current-month">2026年2月</h2>
+                <button id="next-month">下个月</button>
             </div>
         </header>
 
@@ -25,11 +26,11 @@
         <section class="stats">
             <div class="stat-item exercised">
                 <span class="stat-label">已运动</span>
-                <span class="stat-value" id="exercised-count">0</span>
+                <span class="stat-value" id="exercised-count">4</span>
             </div>
             <div class="stat-item absent">
                 <span class="stat-label">未运动</span>
-                <span class="stat-value" id="absent-count">0</span>
+                <span class="stat-value" id="absent-count">19</span>
             </div>
             <div class="stat-item leave">
                 <span class="stat-label">已请假</span>
@@ -48,7 +49,44 @@
                 <div class="weekday">五</div>
                 <div class="weekday">六</div>
             </div>
-            <div class="calendar-grid" id="calendar-grid"></div>
+            <div class="calendar-grid" id="calendar-grid">
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day absent">1</div>
+                <div class="calendar-day absent">2</div>
+                <div class="calendar-day absent">3</div>
+                <div class="calendar-day absent">4</div>
+                <div class="calendar-day absent">5</div>
+                <div class="calendar-day absent">6</div>
+                <div class="calendar-day absent">7</div>
+                <div class="calendar-day absent">8</div>
+                <div class="calendar-day absent">9</div>
+                <div class="calendar-day absent">10</div>
+                <div class="calendar-day absent">11</div>
+                <div class="calendar-day absent">12</div>
+                <div class="calendar-day absent">13</div>
+                <div class="calendar-day absent">14</div>
+                <div class="calendar-day absent">15</div>
+                <div class="calendar-day absent">16</div>
+                <div class="calendar-day absent">17</div>
+                <div class="calendar-day absent">18</div>
+                <div class="calendar-day exercised">19</div>
+                <div class="calendar-day absent">20</div>
+                <div class="calendar-day exercised">21</div>
+                <div class="calendar-day exercised">22</div>
+                <div class="calendar-day exercised">23</div>
+                <div class="calendar-day today">24</div>
+                <div class="calendar-day default">25</div>
+                <div class="calendar-day default">26</div>
+                <div class="calendar-day default">27</div>
+                <div class="calendar-day default">28</div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+                <div class="calendar-day empty"></div>
+            </div>
         </section>
 
         <!-- 状态选择菜单 -->
@@ -83,3 +121,4 @@
     <script src="js/script.js"></script>
 </body>
 </html>
+
