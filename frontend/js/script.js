@@ -23,7 +23,7 @@ function init() {
 
 // 更新当前月份显示
 function updateCurrentMonthDisplay() {
-    currentMonthElement.textContent = `${currentMonth}月`;
+    currentMonthElement.textContent = `${currentYear}年${currentMonth}月`;
 }
 
 // 加载日历数据
@@ -244,4 +244,3 @@ function bindModalEvents() {
 
 // 初始化应用
 init();
-
