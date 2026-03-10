@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models import get_month_records, update_status, get_month_stats
+from models import get_month_records, update_status, get_month_stats, get_consecutive_exercised_days
 import calendar
 
 api = Blueprint('api', __name__)
@@ -53,7 +53,14 @@ def update_day_status():
         success = update_status(year, month, day, status)
         
         if success:
-            return jsonify({'success': True, 'message': '状态更新成功'})
+            response_data = {'success': True, 'message': '状态更新成功'}
+            
+            # 如果是锻炼状态，计算连续打卡天数
+            if status == 'exercised':
+                consecutive_days = get_consecutive_exercised_days(year, month, day)
+                response_data['consecutive_days'] = consecutive_days
+            
+            return jsonify(response_data)
         else:
             return jsonify({'success': False, 'message': '状态更新失败'}), 500
     except Exception as e:
