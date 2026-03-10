@@ -202,12 +202,35 @@ async function updateDayStatus(day, status) {
         if (result.success) {
             // 重新加载日历数据
             loadCalendarData();
+            
+            // 如果是锻炼打卡，检查连续天数并显示鼓励弹窗
+            if (status === 'exercised' && result.consecutive_days > 2) {
+                showEncouragement(result.consecutive_days);
+            }
         } else {
             console.error('更新状态失败:', result.message);
         }
     } catch (error) {
         console.error('更新状态失败:', error);
     }
+}
+
+// 显示鼓励弹窗
+function showEncouragement(consecutiveDays) {
+    const encouragementMessages = [
+        `太棒了！你已经连续打卡${consecutiveDays}天了，坚持就是胜利💪`,
+        `哇塞！连续${consecutiveDays}天锻炼，你也太厉害了吧👏`,
+        `太棒啦！连续打卡${consecutiveDays}天，自律的你超级酷😎`,
+        `牛啊牛啊！已经连续${consecutiveDays}天运动了，好样的🥳`,
+        `太强了！连续${consecutiveDays}天打卡，你的坚持终将美好✨`,
+        `太棒了！连续${consecutiveDays}天锻炼，身体会感谢你的付出的❤️`,
+        `哇！连续${consecutiveDays}天打卡，你就是自律本人吧🔥`,
+        `厉害呀！已经连续运动${consecutiveDays}天了，继续保持哦🎉`
+    ];
+    
+    // 随机选一条鼓励的话
+    const randomMessage = encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)];
+    showModal(randomMessage);
 }
 
 // 显示自定义模态对话框
