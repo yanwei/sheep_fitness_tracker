@@ -30,3 +30,4 @@ build/
 dist/
 *.egg-info/
 .codex/environments/environment.toml
+frontend-dist/
